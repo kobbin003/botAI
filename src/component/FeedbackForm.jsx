@@ -1,4 +1,9 @@
-const FeedbackForm = ({ feedback, setFeedback, setShowModal, saveChat }) => {
+import { useState } from "react";
+import { saveFeedback } from "../utils/chats";
+
+const FeedbackForm = ({ setShowModal, chatId }) => {
+	const [feedback, setFeedback] = useState("");
+
 	const handleFeedbackChange = (e) => {
 		setFeedback(e.target.value);
 	};
@@ -6,11 +11,12 @@ const FeedbackForm = ({ feedback, setFeedback, setShowModal, saveChat }) => {
 		setShowModal(false);
 	};
 
-	const handleFormSubmit = (e) => {
+	const handleFeedbackSubmit = (e) => {
 		e.preventDefault();
 
-		console.log("submitting form.............");
-		saveChat();
+		// save feedback
+		saveFeedback(chatId, feedback);
+
 		// close the modal after saving
 		setShowModal(false);
 	};
@@ -20,7 +26,7 @@ const FeedbackForm = ({ feedback, setFeedback, setShowModal, saveChat }) => {
 			<div>
 				<span>Provide Additional Feedback</span>
 				<button onClick={handleCloseModal}>x</button>
-				<form onSubmit={handleFormSubmit}>
+				<form onSubmit={handleFeedbackSubmit}>
 					<textarea
 						name="feedback"
 						id="feedback"

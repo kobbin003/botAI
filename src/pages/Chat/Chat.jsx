@@ -17,8 +17,6 @@ const Chat = () => {
 	// const [response, setResponse] = useState("");
 	const [responseIsLoading, setResponseIsLoading] = useState(false);
 
-	const [feedback, setFeedback] = useState("");
-
 	const handleQuestionInputChange = (e) => {
 		const val = e.target.value;
 		setQuestion(val);
@@ -41,24 +39,19 @@ const Chat = () => {
 		setQuestion("");
 	};
 
-	const saveChat = () => {
-		console.log("--------------------------");
-		console.log("chat-id", params.id);
-		console.log("chats", chats);
-		console.log("feedback", feedback);
-		console.log("--------------------------");
-		const chat = {
-			id: params.id,
-			chats,
-			feedback,
-		};
-
-		storeChat(chat);
-	};
 	// TODO: pop up the feedback modal on save click
 	// and then save the feedback in the chat
 	const handleSaveChat = () => {
-		// open the modal
+		// store the chat
+		const chat = {
+			id: params.id,
+			chats,
+			feedback: "",
+		};
+
+		storeChat(chat);
+
+		// open the modal for optional user feedback
 		setShowModal(true);
 	};
 
@@ -128,12 +121,7 @@ const Chat = () => {
 			</div>
 			<Modal showModal={showModal} setShowModal={setShowModal}>
 				{showModal ? (
-					<FeedbackForm
-						feedback={feedback}
-						setFeedback={setFeedback}
-						setShowModal={setShowModal}
-						saveChat={saveChat}
-					/>
+					<FeedbackForm setShowModal={setShowModal} chatId={params.id} />
 				) : (
 					<></>
 				)}

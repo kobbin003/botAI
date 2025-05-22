@@ -60,3 +60,25 @@ export function storeChat(chat) {
 
 	return { success: true, message: "chat successfully saved" };
 }
+
+export function saveFeedback(chatId, feedback) {
+	let storedChats = localStorage.getItem(CHAT_STORE_KEY);
+
+	if (!storedChats) {
+		localStorage.setItem(CHAT_STORE_KEY, "[]");
+		storedChats = "[]";
+	}
+
+	const parsed = JSON.parse(storedChats);
+
+	const foundChat = parsed.find(({ id }) => id === chatId);
+
+	if (!foundChat) {
+		throw new Error("chat is suppose to be there");
+	}
+	foundChat.feedback = feedback;
+
+	localStorage.setItem(CHAT_STORE_KEY, JSON.stringify(parsed));
+
+	return { success: true, message: "chat successfully saved" };
+}
