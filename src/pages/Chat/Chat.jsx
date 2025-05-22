@@ -114,11 +114,15 @@ const Chat = () => {
 				</form>
 			</div>
 			<Modal showModal={showModal} setShowModal={setShowModal}>
-				<FeedbackForm
-					feedback={feedback}
-					setFeedback={setFeedback}
-					setShowModal={setShowModal}
-				/>
+				{showModal ? (
+					<FeedbackForm
+						feedback={feedback}
+						setFeedback={setFeedback}
+						setShowModal={setShowModal}
+					/>
+				) : (
+					<></>
+				)}
 			</Modal>
 		</div>
 	);

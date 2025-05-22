@@ -12,7 +12,7 @@ function App() {
 	const [mainPosition, setMainPosition] = useState(250);
 	return (
 		<>
-			<div style={{ display: "flex" }}>
+			<div style={{ display: "flex", height: "2.5rem" }}>
 				<SideBar
 					mainPosition={mainPosition}
 					setMainPosition={setMainPosition}
@@ -21,6 +21,8 @@ function App() {
 					style={{
 						position: `${mainPosition == 0 ? "relative" : "absolute"}`,
 						left: `${mainPosition}px`,
+						backgroundColor: "crimson",
+						// height: "6rem",
 					}}
 				>
 					<h1>Bot AI</h1>

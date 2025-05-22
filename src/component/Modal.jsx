@@ -17,7 +17,6 @@ const Modal = ({ showModal, children }) => {
 				zIndex: "1500", // because the default z-index of MUI drawer is 1200
 			}}
 		>
-			This child is placed in the document body
 			{children}
 		</dialog>,
 		container

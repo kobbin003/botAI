@@ -25,6 +25,9 @@ const FeedbackForm = ({ feedback, setFeedback, setShowModal }) => {
 						value={feedback}
 						onChange={handleFeedbackChange}
 					></textarea>
+					{/* <button type="button" onClick={handleFormSubmit}>
+					Submit
+				</button> */}
 					<button type="submit">Submit</button>
 				</form>
 			</div>

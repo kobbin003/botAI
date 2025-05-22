@@ -54,7 +54,10 @@ export default function SideBar({ mainPosition, setMainPosition }) {
 	return (
 		<div
 			id="sidebar"
-			style={{ width: "fit-content", backgroundColor: "tomato" }}
+			style={{
+				width: "fit-content",
+				backgroundColor: "tomato",
+			}}
 		>
 			{/* <Button onClick={toggleDrawer(true)}> */}
 			<LuAlignJustify onClick={toggleDrawer(true)} />
