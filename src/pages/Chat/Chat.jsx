@@ -58,7 +58,7 @@ const Chat = () => {
 			(async function () {
 				setResponseIsLoading(true);
 				let timer = "";
-				const res = await generateAiResponse(latestChat.question);
+				const res = await generateAiResponse(latestChat.question.content);
 
 				if (res) {
 					console.log("got-res........", res);

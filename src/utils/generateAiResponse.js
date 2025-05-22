@@ -13,7 +13,7 @@ export async function generateAiResponse(question) {
 			} else {
 				resolve("Sorry, Did not understand your query!");
 			}
-		}, 1000);
+		}, 800);
 	});
 
 	if (res) {
