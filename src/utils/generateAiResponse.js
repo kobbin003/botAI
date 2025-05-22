@@ -1,7 +1,7 @@
 import sampleData from "../aiData/sampleData.json";
 
 export async function generateAiResponse(question) {
-	console.log("sampleData: ", sampleData);
+	// console.log("sampleData: ", sampleData);
 	// delay is just to mimic the actual response
 
 	let timer = "";

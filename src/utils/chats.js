@@ -12,12 +12,15 @@
 		isLiked:boolean
 	}
  */
+
+const CHAT_STORE_KEY = "chats";
+
 export const getUserChats = () => {
-	const chats = localStorage.getItem("chats");
+	const chats = localStorage.getItem(CHAT_STORE_KEY);
 
 	if (!chats) {
 		// if key not found, initialise it
-		localStorage.setItem("chats", []);
+		localStorage.setItem(CHAT_STORE_KEY, []);
 		return null;
 	}
 
@@ -26,7 +29,7 @@ export const getUserChats = () => {
 
 // TODO: to be used in the chatList for `history/chat/:id` route.
 export const getUserChatById = (chatId) => {
-	const chats = localStorage.getItem("chats");
+	const chats = localStorage.getItem(CHAT_STORE_KEY);
 
 	if (!chats) {
 		return null;
@@ -41,3 +44,19 @@ export const getUserChatById = (chatId) => {
 
 	return found;
 };
+
+export function storeChat(chat) {
+	let storedChats = localStorage.getItem(CHAT_STORE_KEY);
+
+	if (!storedChats) {
+		localStorage.setItem(CHAT_STORE_KEY, "[]");
+		storedChats = "[]";
+	}
+
+	const parsed = JSON.parse(storedChats);
+	parsed.push(chat);
+
+	localStorage.setItem(CHAT_STORE_KEY, JSON.stringify(parsed));
+
+	return { success: true, message: "chat successfully saved" };
+}

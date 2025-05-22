@@ -2,7 +2,7 @@ import React from "react";
 import ChatMessage from "./ChatMessage";
 
 const ChatList = ({ chats }) => {
-	console.log("chats: ", chats);
+	// console.log("chats: ", chats);
 	return (
 		<div>
 			{chats.length &&

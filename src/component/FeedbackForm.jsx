@@ -1,4 +1,4 @@
-const FeedbackForm = ({ feedback, setFeedback, setShowModal }) => {
+const FeedbackForm = ({ feedback, setFeedback, setShowModal, saveChat }) => {
 	const handleFeedbackChange = (e) => {
 		setFeedback(e.target.value);
 	};
@@ -10,9 +10,11 @@ const FeedbackForm = ({ feedback, setFeedback, setShowModal }) => {
 		e.preventDefault();
 
 		console.log("submitting form.............");
+		saveChat();
 		// close the modal after saving
 		setShowModal(false);
 	};
+
 	return (
 		<div>
 			<div>

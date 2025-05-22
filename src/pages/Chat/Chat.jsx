@@ -1,15 +1,14 @@
 import { useEffect, useState } from "react";
-import { useLocation, useParams } from "react-router";
+import { useParams } from "react-router";
 import ChatList from "../../component/ChatList";
 import EmptyChatPlaceHolder from "../../component/EmptyChatPlaceHolder";
-import { generateAiResponse } from "../../utils/generateAiResponse";
-import Modal from "../../component/Modal";
 import FeedbackForm from "../../component/FeedbackForm";
+import Modal from "../../component/Modal";
+import { generateAiResponse } from "../../utils/generateAiResponse";
+import { storeChat } from "../../utils/chats";
 
 const Chat = () => {
 	const params = useParams();
-	const location = useLocation();
-	console.log("location: ", location);
 	const [chats, setChats] = useState([]);
 
 	const [question, setQuestion] = useState("");
@@ -42,6 +41,20 @@ const Chat = () => {
 		setQuestion("");
 	};
 
+	const saveChat = () => {
+		console.log("--------------------------");
+		console.log("chat-id", params.id);
+		console.log("chats", chats);
+		console.log("feedback", feedback);
+		console.log("--------------------------");
+		const chat = {
+			id: params.id,
+			chats,
+			feedback,
+		};
+
+		storeChat(chat);
+	};
 	// TODO: pop up the feedback modal on save click
 	// and then save the feedback in the chat
 	const handleSaveChat = () => {
@@ -51,7 +64,7 @@ const Chat = () => {
 
 	useEffect(() => {
 		const latestChat = chats[chats.length - 1];
-		console.log("latestChat: ", latestChat);
+		// console.log("latestChat: ", latestChat);
 
 		// is the latest chat have question but does not have response
 		if (latestChat && latestChat.question && !latestChat.response) {
@@ -61,7 +74,7 @@ const Chat = () => {
 				const res = await generateAiResponse(latestChat.question.content);
 
 				if (res) {
-					console.log("got-res........", res);
+					// console.log("got-res........", res);
 					// setResponse(res);
 					setChats((prev) =>
 						prev.map((chat, index) => {
@@ -119,6 +132,7 @@ const Chat = () => {
 						feedback={feedback}
 						setFeedback={setFeedback}
 						setShowModal={setShowModal}
+						saveChat={saveChat}
 					/>
 				) : (
 					<></>
