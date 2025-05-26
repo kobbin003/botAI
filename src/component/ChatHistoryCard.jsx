@@ -3,7 +3,7 @@ import ChatMessage from "./ChatMessage";
 import { Box } from "@mui/material";
 
 const ChatHistoryCard = ({ chat }) => {
-	console.log("chat-history-chat: ", chat);
+	// console.log("chat-history-chat: ", chat);
 	const { id, chats, feedback } = chat;
 
 	const firstChat = chats[0];
