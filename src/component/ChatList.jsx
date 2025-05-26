@@ -1,27 +1,45 @@
 import React from "react";
 import ChatMessage from "./ChatMessage";
+import { Box } from "@mui/material";
+import { CHAT_FOOTER_HEIGHT } from "../pages/Chat/Chat";
+import { HEADER_HEIGHT } from "../App";
 
 const ChatList = ({ chats }) => {
 	// console.log("chats: ", chats);
 	return (
-		<div>
+		<Box
+			sx={{
+				position: "relative",
+				// backgroundColor: "blanchedalmond",
+				height: `calc(100% - ${CHAT_FOOTER_HEIGHT})`,
+				// height: `calc(100vh - ${CHAT_FOOTER_HEIGHT} - ${HEADER_HEIGHT})`,
+				overflowY: "scroll",
+				padding: "3rem 1rem",
+			}}
+		>
 			{chats.length &&
 				chats.map(({ question, response }) => (
-					<div>
+					<Box
+						sx={{
+							display: "flex",
+							flexDirection: "column",
+							// gap: "1rem",
+						}}
+					>
+						{/* question */}
 						<ChatMessage
 							question={question.content}
 							time={question.createdAt}
 						/>
-
-						{response?.content && (
-							<ChatMessage
-								response={response?.content}
-								time={response?.createdAt}
-							/>
-						)}
-					</div>
+						{/* response */}
+						<ChatMessage
+							response={response?.content}
+							time={response?.createdAt}
+						/>
+					</Box>
 				))}
-		</div>
+			{/* {responseIsLoading && <p>Loading...</p>} */}
+		</Box>
 	);
 };
 

@@ -1,17 +1,15 @@
 import { Divider, useMediaQuery } from "@mui/material";
 import Box from "@mui/material/Box";
-import Button from "@mui/material/Button";
 import Drawer from "@mui/material/Drawer";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
-import ListItemButton from "@mui/material/ListItemButton";
-import ListItemText from "@mui/material/ListItemText";
-import { nanoid } from "nanoid";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router";
-// import InboxIcon from "@mui/icons-material/MoveToInbox";
-// import MailIcon from "@mui/icons-material/Mail";
 import { LuAlignJustify } from "react-icons/lu";
+import MyButton from "./MyButton";
+import { HEADER_HEIGHT } from "../App";
+
+//* sidebar width will be a constant 250, won't change.
 export default function SideBar({ mainPosition, setMainPosition }) {
 	const [open, setOpen] = useState(true);
 	const matches = useMediaQuery("(max-width:600px)");
@@ -27,11 +25,11 @@ export default function SideBar({ mainPosition, setMainPosition }) {
 			setMainPosition(250);
 			setOpen(true);
 		}
-	}, [matches]);
+	}, [matches, setMainPosition]);
 
 	const DrawerList = (
 		<Box
-			sx={{ width: 250, backgroundColor: "greenyellow" }}
+			sx={{ width: 250 }}
 			role="presentation"
 			onClick={() => {
 				if (matches) {
@@ -39,13 +37,25 @@ export default function SideBar({ mainPosition, setMainPosition }) {
 				}
 			}}
 		>
-			<List>
-				<ListItem key={"new-chat"} disablePadding>
-					<Link to={`/`}>New Chat</Link>
-				</ListItem>
-				<Divider />
-				<ListItem key={"past-conversations"} disablePadding>
-					<Link to={"/history"}>Past Conversations</Link>
+			<List
+				sx={{
+					display: "flex",
+					flexDirection: "column",
+					gap: "0.4em",
+				}}
+			>
+				{/* <Divider /> */}
+				<ListItem
+					key={"past-conversations"}
+					disablePadding
+					sx={{
+						display: "flex",
+						justifyContent: "center",
+					}}
+				>
+					<Link to={"/history"}>
+						<MyButton text={"Past Conversations"} />
+					</Link>
 				</ListItem>
 			</List>
 		</Box>
@@ -56,21 +66,78 @@ export default function SideBar({ mainPosition, setMainPosition }) {
 			id="sidebar"
 			style={{
 				width: "fit-content",
-				backgroundColor: "tomato",
+				backgroundColor: "",
 			}}
 		>
-			{/* <Button onClick={toggleDrawer(true)}> */}
-			<LuAlignJustify onClick={toggleDrawer(true)} />
-			{/* </Button> */}
+			<Box
+				sx={{
+					height: "2rem",
+					display: "flex",
+					alignItems: "center",
+					padding: "0 0.4em",
+					paddingTop: "0.2em",
+				}}
+			>
+				<LuAlignJustify
+					onClick={toggleDrawer(true)}
+					size={42}
+					color="#9785BA"
+				/>
+			</Box>
+
 			<Drawer
 				open={open}
 				variant={matches ? "temporary" : "persistent"}
 				anchor="left"
-				sx={{ width: mainPosition, backgroundColor: "red" }}
+				sx={{
+					width: mainPosition,
+					backgroundColor: "red",
+					// position: "relative",
+				}}
 				onClose={() => setOpen(false)}
 			>
+				<DrawerHeader />
 				{DrawerList}
 			</Drawer>
 		</div>
+	);
+}
+
+function DrawerHeader() {
+	return (
+		<Box
+			key={"new-chat"}
+			sx={{
+				// position: "relative",
+				backgroundColor: "primary.main",
+				// width: mainPosition,
+				height: `${HEADER_HEIGHT}`,
+				//* it should have the same height as the header and sidebar container
+				//* to make the drawerheader and the header to be of the same height.
+				display: "flex",
+				justifyContent: "center",
+			}}
+		>
+			<Link
+				to={`/`}
+				style={{
+					display: "flex",
+					alignItems: "center",
+					justifyContent: "space-between",
+					// backgroundColor: "blanchedalmond",
+					width: "100%",
+					padding: "0.4em 1em",
+				}}
+			>
+				<img
+					src="/soulAI-avatar.svg"
+					alt="soulAI-avatar"
+					height={40}
+					style={{ borderRadius: "15px" }}
+				/>
+				<span style={{ color: "black" }}>New Chat</span>
+				<img src="/edit.svg" alt="edit" />
+			</Link>
+		</Box>
 	);
 }

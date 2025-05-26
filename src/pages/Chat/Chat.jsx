@@ -6,8 +6,13 @@ import FeedbackForm from "../../component/FeedbackForm";
 import Modal from "../../component/Modal";
 import { generateAiResponse } from "../../utils/generateAiResponse";
 import { storeChat } from "../../utils/chats";
+import { Box, FormControl, TextField } from "@mui/material";
+import MyButton from "../../component/MyButton";
+import { HEADER_HEIGHT } from "../../App";
 
-const Chat = () => {
+export const CHAT_FOOTER_HEIGHT = "3rem";
+
+export const Chat = () => {
 	const params = useParams();
 	const [chats, setChats] = useState([]);
 
@@ -28,7 +33,7 @@ const Chat = () => {
 		const currChat = {
 			question: {
 				content: question,
-				createdAt: new Date().toLocaleString(),
+				createdAt: new Date().toISOString(),
 			},
 			response: null,
 		};
@@ -39,8 +44,6 @@ const Chat = () => {
 		setQuestion("");
 	};
 
-	// TODO: pop up the feedback modal on save click
-	// and then save the feedback in the chat
 	const handleSaveChat = () => {
 		// store the chat
 		const chat = {
@@ -77,7 +80,7 @@ const Chat = () => {
 									...chat,
 									response: {
 										content: res,
-										createdAt: new Date().toLocaleString(),
+										createdAt: new Date().toISOString(),
 									},
 								};
 							} else {
@@ -93,32 +96,72 @@ const Chat = () => {
 	}, [chats]);
 
 	return (
-		<div>
-			<h2>Chat {params.id}</h2>
-			{chats.length > 0 ? <ChatList chats={chats} /> : <EmptyChatPlaceHolder />}
-			{responseIsLoading && <p>Loading...</p>}
-			<div>
-				<form onSubmit={handleAskQuestion}>
-					<input
-						type="text"
+		<Box
+			sx={{
+				position: "relative",
+				width: "100%",
+				height: `calc(100vh - ${HEADER_HEIGHT})`,
+				// overflowY: "scroll",
+				// backgroundColor: "teal",
+				display: "flex",
+				flexDirection: "column",
+			}}
+		>
+			{/* <h2>Chat {params.id}</h2> */}
+			{chats.length > 0 ? (
+				<ChatList chats={chats} />
+			) : (
+				<EmptyChatPlaceHolder setChats={setChats} />
+			)}
+			{/* {responseIsLoading && <p>Loading...</p>} */}
+			<Box
+				sx={{
+					// backgroundColor: "pink",
+					paddingX: "1rem",
+					height: CHAT_FOOTER_HEIGHT,
+					// position: "absolute",
+					// bottom: "0",
+					display: "flex",
+					alignItems: "center",
+				}}
+			>
+				<form
+					onSubmit={handleAskQuestion}
+					style={{
+						display: "flex",
+						flex: 1,
+						flexDirection: "row",
+						alignItems: "center",
+						gap: "1rem",
+						// backgroundColor: "greenyellow",
+					}}
+				>
+					<TextField
+						hiddenLabel
 						value={question}
 						name="question"
 						id="question"
 						placeholder="Message Bot AI..."
 						onChange={handleQuestionInputChange}
+						size="small"
+						sx={{ flex: 1, backgroundColor: "white" }}
 					/>
-					<button type="submit" disabled={responseIsLoading}>
-						Ask
-					</button>
-					<button
-						type="button"
-						onClick={handleSaveChat}
+
+					<MyButton
 						disabled={responseIsLoading}
-					>
-						Save
-					</button>
+						type={"submit"}
+						text={"Ask"}
+						key={"ask"}
+					/>
+					<MyButton
+						disabled={responseIsLoading || !chats.length}
+						type={"button"}
+						text={"Save"}
+						key={"save"}
+						onClickHandler={handleSaveChat}
+					/>
 				</form>
-			</div>
+			</Box>
 			<Modal showModal={showModal} setShowModal={setShowModal}>
 				{showModal ? (
 					<FeedbackForm setShowModal={setShowModal} chatId={params.id} />
@@ -126,7 +169,7 @@ const Chat = () => {
 					<></>
 				)}
 			</Modal>
-		</div>
+		</Box>
 	);
 };
 

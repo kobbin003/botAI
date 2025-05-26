@@ -11,7 +11,7 @@ const Modal = ({ showModal, children }) => {
 		<dialog
 			open={showModal}
 			style={{
-				backgroundColor: "pink",
+				backgroundColor: "transparent",
 				height: "100vh",
 				width: "100vw",
 				zIndex: "1500", // because the default z-index of MUI drawer is 1200

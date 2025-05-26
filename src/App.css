@@ -1,10 +1,10 @@
 main {
 	position: relative;
 	/* left: 500px; */
-	background-color: burlywood;
+	/* background-color: burlywood; */
 }
 header {
 	position: absolute;
-	background-color: slateblue;
+	/* background-color: slateblue; */
 	flex: 1;
 }
