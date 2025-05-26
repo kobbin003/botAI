@@ -1,5 +1,4 @@
 import { Avatar, Box, Typography } from "@mui/material";
-import React from "react";
 import { CHAT_FOOTER_HEIGHT } from "../pages/Chat/Chat";
 
 const preQuestionList = [
@@ -24,14 +23,10 @@ const EmptyChatPlaceHolder = ({ setChats }) => {
 	return (
 		<Box
 			sx={{
-				// position: "relative",
-				// flex: 1,
 				display: "flex",
 				flexDirection: "column",
 				position: "relative",
-				// backgroundColor: "blanchedalmond",
 				height: `calc(100% - ${CHAT_FOOTER_HEIGHT})`,
-				// height: `calc(100vh - ${CHAT_FOOTER_HEIGHT} - ${HEADER_HEIGHT})`,
 				overflowY: "scroll",
 				padding: "3rem 1rem",
 			}}
@@ -39,7 +34,6 @@ const EmptyChatPlaceHolder = ({ setChats }) => {
 			<Box
 				sx={{
 					flex: 1,
-					// backgroundColor: "grey",
 					display: "flex",
 					flexDirection: "column",
 					alignItems: "center",
@@ -83,7 +77,6 @@ const EmptyChatPlaceHolder = ({ setChats }) => {
 							flexDirection: "column",
 							alignItems: "flex-start",
 							justifyContent: "center",
-							// width: "fit-content",
 							height: "fit-content",
 							padding: "2rem 1rem",
 							borderRadius: "5px",

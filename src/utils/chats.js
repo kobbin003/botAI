@@ -27,7 +27,7 @@ export const getUserChats = () => {
 	return JSON.parse(chats);
 };
 
-// TODO: to be used in the chatList for `history/chat/:id` route.
+// to be used in the chatList for `history/chat/:id` route.
 export const getUserChatById = (chatId) => {
 	const chats = localStorage.getItem(CHAT_STORE_KEY);
 

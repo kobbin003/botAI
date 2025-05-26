@@ -5,14 +5,11 @@ import { CHAT_FOOTER_HEIGHT } from "../pages/Chat/Chat";
 import { HEADER_HEIGHT } from "../App";
 
 const ChatList = ({ chats }) => {
-	// console.log("chats: ", chats);
 	return (
 		<Box
 			sx={{
 				position: "relative",
-				// backgroundColor: "blanchedalmond",
 				height: `calc(100% - ${CHAT_FOOTER_HEIGHT})`,
-				// height: `calc(100vh - ${CHAT_FOOTER_HEIGHT} - ${HEADER_HEIGHT})`,
 				overflowY: "scroll",
 				padding: "3rem 1rem",
 			}}
@@ -23,7 +20,6 @@ const ChatList = ({ chats }) => {
 						sx={{
 							display: "flex",
 							flexDirection: "column",
-							// gap: "1rem",
 						}}
 					>
 						{/* question */}
@@ -38,7 +34,6 @@ const ChatList = ({ chats }) => {
 						/>
 					</Box>
 				))}
-			{/* {responseIsLoading && <p>Loading...</p>} */}
 		</Box>
 	);
 };

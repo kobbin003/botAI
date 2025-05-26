@@ -2,10 +2,8 @@ import { Avatar, Box, Typography } from "@mui/material";
 import React from "react";
 import { useLocation } from "react-router";
 
-// user
 //* either question is falsy or response is. Both cannot be same at the same time
 const ChatMessage = ({ question, response, time }) => {
-	// console.log("time;...................", time);
 	const timeObject = new Date(time);
 	const location = useLocation();
 	console.log("location: ", location);

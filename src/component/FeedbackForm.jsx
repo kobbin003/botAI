@@ -1,9 +1,9 @@
+import { Box, Typography } from "@mui/material";
 import { useState } from "react";
-import { saveFeedback } from "../utils/chats";
-import { Box, Button, Typography } from "@mui/material";
-import { IoCloseSharp } from "react-icons/io5";
-import MyButton from "./MyButton";
 import { HiOutlineLightBulb } from "react-icons/hi";
+import { IoCloseSharp } from "react-icons/io5";
+import { saveFeedback } from "../utils/chats";
+import MyButton from "./MyButton";
 
 const FeedbackForm = ({ setShowModal, chatId }) => {
 	const [feedback, setFeedback] = useState("");
@@ -21,7 +21,7 @@ const FeedbackForm = ({ setShowModal, chatId }) => {
 		// save feedback
 		saveFeedback(chatId, feedback);
 
-		// // close the modal after saving
+		// close the modal after saving
 		setShowModal(false);
 	};
 
@@ -31,8 +31,6 @@ const FeedbackForm = ({ setShowModal, chatId }) => {
 				position: "relative",
 				height: "100%",
 				width: "100%",
-				// backgroundColor: "transparent",
-				// backgroundColor: "rgba(0, 0, 0, 0.5)",
 				backdropFilter: "blur(2px) opacity(90%)",
 				display: "flex",
 				justifyContent: "center",

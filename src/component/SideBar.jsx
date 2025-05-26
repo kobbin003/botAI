@@ -1,13 +1,13 @@
-import { Divider, useMediaQuery } from "@mui/material";
+import { useMediaQuery } from "@mui/material";
 import Box from "@mui/material/Box";
 import Drawer from "@mui/material/Drawer";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import { useEffect, useState } from "react";
-import { Link } from "react-router";
 import { LuAlignJustify } from "react-icons/lu";
-import MyButton from "./MyButton";
+import { Link } from "react-router";
 import { HEADER_HEIGHT } from "../App";
+import MyButton from "./MyButton";
 
 //* sidebar width will be a constant 250, won't change.
 export default function SideBar({ mainPosition, setMainPosition }) {
@@ -92,7 +92,6 @@ export default function SideBar({ mainPosition, setMainPosition }) {
 				sx={{
 					width: mainPosition,
 					backgroundColor: "red",
-					// position: "relative",
 				}}
 				onClose={() => setOpen(false)}
 			>
@@ -108,9 +107,7 @@ function DrawerHeader() {
 		<Box
 			key={"new-chat"}
 			sx={{
-				// position: "relative",
 				backgroundColor: "primary.main",
-				// width: mainPosition,
 				height: `${HEADER_HEIGHT}`,
 				//* it should have the same height as the header and sidebar container
 				//* to make the drawerheader and the header to be of the same height.
@@ -124,7 +121,6 @@ function DrawerHeader() {
 					display: "flex",
 					alignItems: "center",
 					justifyContent: "space-between",
-					// backgroundColor: "blanchedalmond",
 					width: "100%",
 					padding: "0.4em 1em",
 				}}

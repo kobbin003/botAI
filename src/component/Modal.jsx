@@ -4,7 +4,6 @@ const Modal = ({ showModal, children }) => {
 	if (typeof window != "object") return null;
 
 	const container = document.getElementById("root-modal");
-	// console.log("modal-container......", container);
 	if (!container) return null;
 
 	return createPortal(

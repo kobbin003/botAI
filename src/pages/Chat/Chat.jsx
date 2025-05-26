@@ -1,14 +1,14 @@
+import { Box, TextField } from "@mui/material";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router";
+import { HEADER_HEIGHT } from "../../App";
 import ChatList from "../../component/ChatList";
 import EmptyChatPlaceHolder from "../../component/EmptyChatPlaceHolder";
 import FeedbackForm from "../../component/FeedbackForm";
 import Modal from "../../component/Modal";
-import { generateAiResponse } from "../../utils/generateAiResponse";
-import { storeChat } from "../../utils/chats";
-import { Box, FormControl, TextField } from "@mui/material";
 import MyButton from "../../component/MyButton";
-import { HEADER_HEIGHT } from "../../App";
+import { storeChat } from "../../utils/chats";
+import { generateAiResponse } from "../../utils/generateAiResponse";
 
 export const CHAT_FOOTER_HEIGHT = "3rem";
 
@@ -19,7 +19,6 @@ export const Chat = () => {
 	const [question, setQuestion] = useState("");
 
 	const [showModal, setShowModal] = useState(false);
-	// const [response, setResponse] = useState("");
 	const [responseIsLoading, setResponseIsLoading] = useState(false);
 
 	const handleQuestionInputChange = (e) => {
@@ -60,7 +59,6 @@ export const Chat = () => {
 
 	useEffect(() => {
 		const latestChat = chats[chats.length - 1];
-		// console.log("latestChat: ", latestChat);
 
 		// is the latest chat have question but does not have response
 		if (latestChat && latestChat.question && !latestChat.response) {
@@ -70,8 +68,6 @@ export const Chat = () => {
 				const res = await generateAiResponse(latestChat.question.content);
 
 				if (res) {
-					// console.log("got-res........", res);
-					// setResponse(res);
 					setChats((prev) =>
 						prev.map((chat, index) => {
 							if (index === prev.length - 1) {
@@ -101,26 +97,19 @@ export const Chat = () => {
 				position: "relative",
 				width: "100%",
 				height: `calc(100vh - ${HEADER_HEIGHT})`,
-				// overflowY: "scroll",
-				// backgroundColor: "teal",
 				display: "flex",
 				flexDirection: "column",
 			}}
 		>
-			{/* <h2>Chat {params.id}</h2> */}
 			{chats.length > 0 ? (
 				<ChatList chats={chats} />
 			) : (
 				<EmptyChatPlaceHolder setChats={setChats} />
 			)}
-			{/* {responseIsLoading && <p>Loading...</p>} */}
 			<Box
 				sx={{
-					// backgroundColor: "pink",
 					paddingX: "1rem",
 					height: CHAT_FOOTER_HEIGHT,
-					// position: "absolute",
-					// bottom: "0",
 					display: "flex",
 					alignItems: "center",
 				}}
@@ -133,7 +122,6 @@ export const Chat = () => {
 						flexDirection: "row",
 						alignItems: "center",
 						gap: "1rem",
-						// backgroundColor: "greenyellow",
 					}}
 				>
 					<TextField
